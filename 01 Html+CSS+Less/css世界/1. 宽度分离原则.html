@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>宽度分离原则</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      ul {
+        list-style: none;
+      }
+      .cf::after {
+        content: '';
+        display: block;
+        clear: both;
+      }
+
+      /* list */
+
+      /* 第一步: 宽度分离到外盒子 */
+      .list-wrap {
+        width: 800px;
+        /* 第四步: 隐藏ul超出部分 */
+        overflow: hidden;
+        background-color: #ccc;
+        /* 消除空白字符产生的水平间隙 */
+        font-size: 0;
+      }
+
+      .list {
+        display: inline-block;
+        /* ul 长度超过 wrap 的关键 */
+        white-space: nowrap;
+      }
+
+      /* 第二步: 确定 li 宽度 */
+      /* 第三步: margin 值 = (800 - 3 * 250) / 2 */
+      .list li {
+        display: inline-block;
+        width: 250px;
+        height: 50px;
+        margin-right: 25px;
+        background-color: pink;
+      }
+
+      /* list end */
+
+      /* box-sixing 作用 */
+
+      /* 1. 外盒子设置了宽度 */
+      .box {
+        width: 800px;
+        background-color: #ccc;
+      }
+
+      /* 2. width 默认auto */
+      /* 不管 border 和 padding 怎么折腾, 外盒子总宽度固定 */
+      .content {
+        border: 2px solid #000;
+        padding: 20px;
+        height: 100px;
+        background-color: pink;
+        background-clip: content-box;
+      }
+
+      /* box-sixing 作用 end */
+
+      /* multi-list */
+
+      .wrap {
+        width: 800px;
+        height: 150px;
+        background-color: #ccc;
+        overflow: hidden;
+      }
+
+      .wrap .multi-list {
+        margin-right: -50px;
+      }
+
+      .wrap .multi-list li {
+        float: left;
+        margin-bottom: 50px;
+        width: 120px;
+        height: 50px;
+        margin-right: 50px;
+        background-color: pink;
+      }
+
+      /* multi-list end */
+
+      /* max-height */
+      /* 元素在收起的时候会有延迟, max-height 设置越大延迟越大, 因为多余的高度也计算在收起时间内 */
+      .element {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease-in-out;
+        background-color: pink;
+      }
+      .element.active {
+        /* 一个足够大的最大高度值 */
+        /* 但同时也是足够小的安全值 */
+        max-height: 300px;
+      }
+
+      .test {
+        background-color: pink;
+      }
+      .test span {
+        display: inline-block;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 1. 块元素水平排列 -->
+    <div class="list-wrap">
+      <ul class="list">
+        <li></li>
+        <li></li>
+        <li></li>
+      </ul>
+    </div>
+
+    <!-- 2. 起到 box-sizing 的作用 -->
+    <div class="box">
+      <div class="content"></div>
+    </div>
+
+    <div class="wrap">
+      <ul class="multi-list cf">
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+      </ul>
+    </div>
+
+    <!-- max-height 实现外盒子高度auto时的动画效果 -->
+    <button>按钮</button>
+    <div class="element">
+      但是，使用此方法也有一点要注意，即虽然说从适用范围讲，max- height
+      值越大使用 场景越多，但是，如果 max-height
+      值太大，在收起的时候可能会有“效果延迟”的问
+      题，比方说，我们展开的元素高度是 100 像素，而 max-height 是 1000
+      像素，动画时间 是 250 ms，假设我们动画函数是线性的，则前 225 ms
+      我们是看不到收起效果的，因为 max-height 从 1000 像素到 100
+      像素变化这段时间，元素不会有区域被隐藏，会给人动 画延迟 225 ms
+      的感觉，相信这不是你想看到的。
+    </div>
+
+    <div class="test"><span></span></div>
+
+    <script>
+      const btn = document.querySelector('button')
+      let flag = false
+      btn.onclick = function () {
+        if (flag) {
+          document.querySelector('.element').classList.remove('active')
+        } else {
+          document.querySelector('.element').classList.add('active')
+        }
+        flag = !flag
+      }
+    </script>
+  </body>
+</html>

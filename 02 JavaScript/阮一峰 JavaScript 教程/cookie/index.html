@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>cookie</title>
+  </head>
+  <body>
+    <script>
+      const cookie = {
+        // 默认 30 天
+        set(name, value, day = 30) {
+          const timestamp = day * 1000 * 3600 * 24 + new Date().getTime()
+          const expires = new Date(timestamp).toUTCString()
+
+          // encodeURIComponent 对 空格 / . 等等进行转码
+          document.cookie = `${name}=${encodeURIComponent(
+            value
+          )};expires=${expires}`
+        },
+        // 如果没有找到, 则返回 null
+        get(name) {
+          const cookies = document.cookie.split('; ')
+          let str = cookies.find((item) => item.split('=')[0] === name)
+          return str ? decodeURIComponent(str.split('=')[1]) : null
+        },
+        remove(name) {
+          this.set(name, '', -1)
+        }
+      }
+      cookie.set('test', '1 + 1')
+      console.log(cookie.get('test'))
+    </script>
+  </body>
+</html>

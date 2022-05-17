@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+
+      .board {
+        display: flex;
+        flex-wrap: wrap;
+        width: 540px;
+        background: url('https://www.wuziqi123.com/skin/wuziqi/images/chessboard.png')
+          13px 13px no-repeat;
+        border: 1px solid #000;
+      }
+      .grid {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        background: no-repeat center;
+      }
+
+      .grid.black {
+        background-image: url('https://www.wuziqi123.com/skin/wuziqi/images/black.png');
+      }
+
+      .grid.white {
+        background-image: url('https://www.wuziqi123.com/skin/wuziqi/images/white.png');
+      }
+
+      .grid:hover::after {
+        content: '';
+        width: 15px;
+        height: 15px;
+        border: 1px solid #fe0000;
+      }
+      .grid.black:hover::after,
+      .grid.white:hover::after {
+        display: none;
+      }
+      .grid.last::before {
+        content: '';
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background-color: #fe0000;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="board"></div>
+      <button id="btn">重置</button>
+      <p id="result"></p>
+    </div>
+
+    <script src="./Gobang.js"></script>
+    <script>
+      const boardElt = document.querySelector('.board')
+      const result = document.querySelector('#result')
+
+      const gobang = new Gobang(boardElt)
+      gobang.initGame()
+      gobang.finish(
+        () => (result.innerText = '恭喜!胜利!'),
+        () => (result.innerText = '失败了')
+      )
+
+      const btn = document.querySelector('#btn')
+      btn.onclick = function () {
+        gobang.reStart()
+      }
+    </script>
+  </body>
+</html>

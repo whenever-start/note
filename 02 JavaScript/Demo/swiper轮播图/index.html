@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      .swiper {
+        width: 800px;
+        margin: 50px auto 0;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .swiper-container {
+        display: flex;
+        transition: all 0.3s;
+      }
+
+      /* indicator */
+      .swiper-indicator {
+        position: absolute;
+        left: 50%;
+        bottom: 20px;
+        transform: translateX(-50%);
+        display: flex;
+        justify-content: center;
+        z-index: 10;
+        background-color: rgba(0, 0, 0, 0.1);
+        border-radius: 999px;
+      }
+
+      .swiper-indicator .dot {
+        width: 16px;
+        height: 16px;
+        margin-left: 8px;
+        border-radius: 50%;
+        border: 1px solid #0082cf;
+      }
+
+      .swiper-indicator .dot:first-child {
+        margin-left: 0;
+      }
+
+      .swiper-indicator .dot.active {
+        background-color: #0082cf;
+      }
+
+      /* btn */
+      .swiper-btn {
+        width: 30px;
+        line-height: 30px;
+        text-align: center;
+        border-radius: 50%;
+        border: 1px solid #000;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        cursor: pointer;
+        user-select: none;
+        z-index: 10;
+      }
+
+      .swiper-btn.prev {
+        left: 20px;
+      }
+
+      .swiper-btn.next {
+        right: 20px;
+      }
+
+      /* layer */
+      .swiper-layer {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.1);
+      }
+
+      /* 测试代码 */
+      .swiper-slider {
+        flex: none;
+        width: 800px;
+        height: 600px;
+        text-align: center;
+        line-height: 600px;
+        color: #fff;
+        font-size: 32px;
+      }
+
+      .swiper-slider:nth-of-type(1) {
+        background-color: cyan;
+      }
+      .swiper-slider:nth-of-type(2) {
+        background-color: pink;
+      }
+      .swiper-slider:nth-of-type(3) {
+        background-color: green;
+      }
+      .swiper-slider:nth-of-type(4) {
+        background-color: orange;
+      }
+      .swiper-slider:nth-of-type(5) {
+        background-color: slateblue;
+      }
+      .swiper-slider:nth-of-type(6) {
+        background-color: darkred;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="swiper">
+      <div class="swiper-container">
+        <div class="swiper-slider">1</div>
+        <div class="swiper-slider">2</div>
+        <div class="swiper-slider">3</div>
+        <div class="swiper-slider">4</div>
+      </div>
+
+      <div class="swiper-indicator"></div>
+
+      <div class="swiper-btn prev">&lt;</div>
+      <div class="swiper-btn next">&gt;</div>
+
+      <!-- <div class="swiper-layer"></div> -->
+    </div>
+
+    <script>
+      function throttle(fn, delay) {
+        let prev = 0
+        return function (...args) {
+          let now = new Date().getTime()
+
+          if (now - prev >= delay) {
+            fn.apply(this, args)
+            prev = now
+          }
+        }
+      }
+
+      function indexInLoop(index, len) {
+        return index < 0 ? len + index : index >= len ? index - len : index
+      }
+    </script>
+    <script src="./Swiper.js"></script>
+
+    <script>
+      const el = document.querySelector('.swiper')
+      const ms = new Swiper(el)
+      ms.init()
+    </script>
+  </body>
+</html>

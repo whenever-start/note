@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>导航 inline-block + white-space</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      ul {
+        list-style: none;
+      }
+
+      html {
+        font-size: 13.3333333333334vw;
+      }
+
+      .nav-container {
+        background-color: #ccc;
+        font-size: 0;
+        overflow: hidden;
+        padding: 0 0.2rem;
+        background-clip: content-box;
+      }
+
+      .nav {
+        display: inline-block;
+        white-space: nowrap;
+      }
+
+      .nav:first-child {
+        margin-bottom: 0.2rem;
+      }
+
+      .nav-item {
+        display: inline-block;
+        width: 1.2rem;
+        height: 1.2rem;
+        background-color: #bfa;
+        margin-right: 0.275rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="nav-container">
+      <ul class="nav">
+        <li class="nav-item"></li>
+        <li class="nav-item"></li>
+        <li class="nav-item"></li>
+        <li class="nav-item"></li>
+        <li class="nav-item"></li>
+      </ul>
+      <ul class="nav">
+        <li class="nav-item"></li>
+        <li class="nav-item"></li>
+        <li class="nav-item"></li>
+        <li class="nav-item"></li>
+        <li class="nav-item"></li>
+      </ul>
+    </div>
+  </body>
+</html>

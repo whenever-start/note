@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>css回到顶部</title>
+    <style>
+      html {
+        /* 让滚动平滑, 按需要添加 */
+        scroll-behavior: smooth;
+      }
+
+      /* 关键代码 */
+      .go-top {
+        position: sticky; /* 有兼容性 */
+        float: right; /* 用来脱离文档和向右靠, left值不起作用 */
+        top: 850px; /* 调整按钮y轴位置 */
+        margin-right: 20px; /* x轴位置 */
+      }
+
+      /* 按钮样式 */
+      .btn {
+        width: 40px;
+        height: 40px;
+        padding: 10px;
+        text-align: center;
+        border: 1px solid #000;
+      }
+
+      /* ************* 测试用代码 ************* */
+      .box {
+        height: 500px;
+      }
+
+      .box:nth-of-type(4n + 1) {
+        background-color: pink;
+      }
+
+      .box:nth-of-type(4n + 2) {
+        background-color: cyan;
+      }
+
+      .box:nth-of-type(4n + 3) {
+        background-color: green;
+      }
+
+      .box:nth-of-type(4n + 4) {
+        background-color: yellow;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="box" id="top"></div>
+    <div class="box"></div>
+    <!-- 
+      1. 放在 body 标签中(父级是body)
+      2. 前面的元素高度加起来要超过一屏
+    -->
+    <a class="go-top btn" href="#top">回到顶部</a>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+  </body>
+</html>

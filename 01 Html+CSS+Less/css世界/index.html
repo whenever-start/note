@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      .box1 {
+        background-color: pink;
+      }
+      .box1 span {
+        display: inline-block;
+      }
+
+      .wrap {
+        background-color: #ccc;
+        width: 400px;
+        height: 200px;
+        text-align: justify;
+        font-size: 0;
+      }
+      .wrap::before {
+        content: '';
+        height: 100%;
+        display: inline-block;
+      }
+      .wrap::after {
+        content: '';
+        width: 100%;
+        display: inline-block;
+      }
+      .item {
+        width: 20px;
+        display: inline-block;
+      }
+      .item:nth-child(1) {
+        background-color: pink;
+        height: 80px;
+      }
+      .item:nth-child(2) {
+        background-color: cyan;
+        height: 120px;
+      }
+      .item:nth-child(3) {
+        background-color: blue;
+        height: 30px;
+      }
+      .item:nth-child(4) {
+        background-color: green;
+        height: 40px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 1. inline-block 有 幽灵空白节点 -->
+    <div class="box1"><span></span></div>
+
+    <!-- inline-block justify -->
+    <!-- 不能换行, 有空格会破坏对齐效果 -->
+    <!--  prettier-ignore -->
+    <div class="wrap"><i class="item"></i>
+      <i class="item"></i>
+      <i class="item"></i>
+      <i class="item"></i>
+    </div>
+  </body>
+</html>

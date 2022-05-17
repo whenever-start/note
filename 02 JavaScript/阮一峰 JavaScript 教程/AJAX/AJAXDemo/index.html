@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.27.2/axios.min.js"></script>
+    <title>ajax demo</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      .box {
+        height: 200px;
+        background-color: #ccc;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box"></div>
+    <button>get</button>
+    <button>post</button>
+    <button>通用</button>
+    <button>jsonp</button>
+
+    <script>
+      const buttons = document.querySelectorAll('button')
+      const box = document.querySelector('.box')
+
+      axios.defaults.baseURL = 'http://127.0.0.1:8000'
+
+      buttons[0].onclick = function () {
+        axios.get('/article', {
+          params: { a: 0, b: 100 },
+          responseType: 'json'
+        })
+      }
+
+      buttons[1].onclick = function () {
+        axios.post('/axios-server', { name: 'jim' }, { responseType: 'json' })
+      }
+
+      buttons[2].onclick = function () {
+        axios({
+          method: 'post',
+          url: '/axios-server',
+          headers: {
+            a: 100,
+            b: 200
+          },
+          responseType: 'json',
+          data: {
+            name: 'tom',
+            age: 11
+          }
+        }).then((res) => console.log(res))
+      }
+
+      buttons[3].onclick = function () {
+        // callback()
+      }
+
+      function callback(data) {
+        console.log('jsonp data', data)
+      }
+    </script>
+    <script src="http://127.0.0.1:8000/jsonp-server"></script>
+  </body>
+</html>

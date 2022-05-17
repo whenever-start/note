@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>flex 导航布局</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      ul {
+        list-style: none;
+      }
+
+      html {
+        font-size: 13.333333333333334vw;
+      }
+
+      .nav-container {
+        background-color: #ccc;
+      }
+
+      .nav-container .nav {
+        display: flex;
+        justify-content: space-between;
+        align-content: space-between;
+        flex-wrap: wrap;
+        padding: 0 0.2rem;
+        height: 2.6rem;
+      }
+
+      .nav-container .nav-item {
+        width: 1.2rem;
+        height: 1.2rem;
+        background-color: #bfa;
+      }
+
+      /* ********* 分割线 ******** */
+
+      .container {
+        margin-top: 50px;
+        background-color: #ccc;
+      }
+
+      .nav {
+        padding: 0 0.2rem;
+        display: flex;
+        justify-content: space-between;
+      }
+
+      .container .nav-col {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 2.6rem;
+      }
+
+      .container .nav-item {
+        width: 1.2rem;
+        height: 1.2rem;
+        background-color: #bfa;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="nav-container">
+      <ul class="nav">
+        <li class="nav-item"></li>
+        <li class="nav-item"></li>
+        <li class="nav-item"></li>
+        <li class="nav-item"></li>
+        <li class="nav-item"></li>
+        <li class="nav-item"></li>
+        <li class="nav-item"></li>
+        <li class="nav-item"></li>
+        <li class="nav-item"></li>
+        <li class="nav-item"></li>
+      </ul>
+    </div>
+
+    <div class="container">
+      <div class="nav">
+        <div class="nav-col">
+          <div class="nav-item"></div>
+          <div class="nav-item"></div>
+        </div>
+        <div class="nav-col">
+          <div class="nav-item"></div>
+          <div class="nav-item"></div>
+        </div>
+        <div class="nav-col">
+          <div class="nav-item"></div>
+          <div class="nav-item"></div>
+        </div>
+        <div class="nav-col">
+          <div class="nav-item"></div>
+          <div class="nav-item"></div>
+        </div>
+        <div class="nav-col">
+          <div class="nav-item"></div>
+          <div class="nav-item"></div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

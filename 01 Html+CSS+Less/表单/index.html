@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>表单</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      ul {
+        list-style: none;
+      }
+      .box {
+        margin-bottom: 20px;
+        padding: 20px;
+        border: 1px solid #000;
+      }
+
+      .box > .title {
+        margin-bottom: 10px;
+        font-size: 18px;
+        font-weight: bold;
+      }
+
+      legend {
+        padding: 0;
+        margin: 0;
+        padding-inline-start: 0;
+        padding-inline-end: 0;
+        border-image: none;
+        border-width: 0;
+        border-style: none;
+        border-color: red;
+        display: inline;
+      }
+      fieldset {
+        border-style: none;
+      }
+
+      /* select */
+      .el-input {
+        position: relative;
+        font-size: 14px;
+        display: inline-block;
+        width: 100%;
+      }
+      .el-input--suffix .el-input__inner {
+        padding-right: 30px;
+      }
+      .el-select .el-input__inner {
+        cursor: pointer;
+        padding-right: 35px;
+      }
+      .el-input__inner {
+        -webkit-appearance: none;
+        background-color: #fff;
+        background-image: none;
+        border-radius: 4px;
+        border: 1px solid #dcdfe6;
+        box-sizing: border-box;
+        color: #606266;
+        display: inline-block;
+        font-size: inherit;
+        height: 40px;
+        line-height: 40px;
+        outline: none;
+        padding: 0 15px;
+        transition: border-color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+        width: 100%;
+      }
+      .el-input__suffix {
+        position: absolute;
+        height: 100%;
+        right: 5px;
+        top: 0;
+        text-align: center;
+        color: #c0c4cc;
+        transition: all 0.3s;
+        pointer-events: none;
+      }
+      .el-input__suffix-inner {
+        pointer-events: all;
+      }
+      .el-select .el-input .el-select__caret {
+        color: #c0c4cc;
+        font-size: 14px;
+        transition: transform 0.3s;
+        transform: rotate(180deg);
+        cursor: pointer;
+      }
+      .el-input__icon {
+        width: 25px;
+        line-height: 40px;
+      }
+      .el-input__icon,
+      .el-input__prefix {
+        height: 100%;
+        text-align: center;
+        transition: all 0.3s;
+      }
+      [class*=' el-icon-'],
+      [class^='el-icon-'] {
+        font-family: element-icons !important;
+        /* speak: none; */
+        font-style: normal;
+        font-weight: 400;
+        font-variant: normal;
+        text-transform: none;
+        line-height: 1;
+        vertical-align: baseline;
+        display: inline-block;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+      .el-icon-arrow-up:before {
+        display: inline-block;
+        content: '';
+        width: 5px;
+        height: 5px;
+        border-left: 1px solid #ccc;
+        border-bottom: 1px solid #ccc;
+        transform: rotate(-45deg);
+      }
+      .el-input__icon:after {
+        content: '';
+        height: 100%;
+        width: 0;
+        display: inline-block;
+        vertical-align: middle;
+      }
+
+      /* select popup */
+      .select {
+        position: relative;
+      }
+      .el-select-dropdown {
+        position: absolute;
+        z-index: 1001;
+        border: 1px solid #e4e7ed;
+        border-radius: 4px;
+        background-color: #fff;
+        box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+        box-sizing: border-box;
+        margin: 5px 0;
+      }
+      .el-scrollbar {
+        overflow: hidden;
+        position: relative;
+      }
+      .el-scrollbar__wrap {
+        overflow: scroll;
+        height: 100%;
+      }
+      .el-select-dropdown__wrap {
+        max-height: 274px;
+      }
+      .el-select-dropdown__list {
+        list-style: none;
+        padding: 6px 0;
+        margin: 0;
+        box-sizing: border-box;
+      }
+      .el-select-dropdown__item {
+        font-size: 14px;
+        padding: 0 20px;
+        position: relative;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        color: #606266;
+        height: 34px;
+        line-height: 34px;
+        box-sizing: border-box;
+        cursor: pointer;
+      }
+      .el-select-dropdown__item:hover {
+        background-color: #f5f7fa;
+      }
+      .el-select-dropdown__item {
+        font-size: 14px;
+        padding: 0 20px;
+        position: relative;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        color: #606266;
+        height: 34px;
+        line-height: 34px;
+        box-sizing: border-box;
+        cursor: pointer;
+      }
+      .el-scrollbar__bar.is-horizontal {
+        height: 6px;
+        left: 2px;
+      }
+      .el-scrollbar__bar {
+        position: absolute;
+        right: 2px;
+        bottom: 2px;
+        z-index: 1;
+        border-radius: 4px;
+        opacity: 0;
+        transition: opacity 0.12s ease-out;
+      }
+      .el-scrollbar__bar.is-horizontal > div {
+        height: 100%;
+      }
+      .el-scrollbar__thumb {
+        position: relative;
+        display: block;
+        width: 0;
+        height: 0;
+        cursor: pointer;
+        border-radius: inherit;
+        background-color: rgba(144, 147, 153, 0.3);
+        transition: background-color 0.3s;
+      }
+      .el-scrollbar__bar.is-vertical {
+        width: 6px;
+        top: 2px;
+      }
+      .el-scrollbar__bar {
+        position: absolute;
+        right: 2px;
+        bottom: 2px;
+        z-index: 1;
+        border-radius: 4px;
+        opacity: 0;
+        transition: opacity 0.12s ease-out;
+      }
+      .el-scrollbar__bar.is-vertical > div {
+        width: 100%;
+      }
+      .el-scrollbar__thumb {
+        position: relative;
+        display: block;
+        width: 0;
+        height: 0;
+        cursor: pointer;
+        border-radius: inherit;
+        background-color: rgba(144, 147, 153, 0.3);
+        transition: background-color 0.3s;
+      }
+      .el-popper[x-placement^='bottom'] .popper__arrow {
+        top: -6px;
+        left: 50%;
+        margin-right: 3px;
+        border-top-width: 0;
+        border-bottom-color: #ebeef5;
+      }
+      .el-popper .popper__arrow {
+        border-width: 6px;
+        filter: drop-shadow(0 2px 12px rgba(0, 0, 0, 0.03));
+      }
+      .el-popper .popper__arrow,
+      .el-popper .popper__arrow:after {
+        position: absolute;
+        display: block;
+        width: 0;
+        height: 0;
+        border-color: transparent;
+        border-style: solid;
+      }
+      .el-popper .popper__arrow:after {
+        content: ' ';
+        border-width: 6px;
+      }
+      .el-popper .popper__arrow,
+      .el-popper .popper__arrow:after {
+        position: absolute;
+        display: block;
+        width: 0;
+        height: 0;
+        border-color: transparent;
+        border-style: solid;
+      }
+      .div {
+        width: 100%;
+        height: 20px;
+        background-color: pink;
+        padding: 20px;
+      }
+
+      .wrap {
+        width: 320px;
+        background-color: #ccc;
+        font-size: 0;
+        overflow: hidden;
+      }
+      .wrap .ul {
+        display: inline-block;
+        white-space: nowrap;
+      }
+      .wrap li {
+        width: 95px;
+        height: 40px;
+        margin-right: 17.5px;
+        background-color: pink;
+        /* float: left; */
+        display: inline-block;
+      }
+      .wrap li:last-child {
+        /* margin-right: 0; */
+      }
+      /* .cf::after {
+        content: '';
+        display: table;
+        clear: both;
+      } */
+    </style>
+  </head>
+  <body>
+    <!-- form -->
+    <div class="box">
+      <div class="title">form</div>
+
+      <form action="https://example.com/api" method="post">
+        <fieldset>
+          <label for="POST-name">用户名：</label>
+          <input id="POST-name" type="text" name="user" />
+          <input type="submit" value="提交" />
+        </fieldset>
+      </form>
+    </div>
+
+    <!-- fieldset legend -->
+    <div class="box">
+      <div class="title">fieldset legend</div>
+
+      <form>
+        <fieldset>
+          <legend>学生登记</legend>
+          <p>年龄：<input type="text" name="age" /></p>
+          <p>性别：<input type="text" name="gender" /></p>
+        </fieldset>
+      </form>
+    </div>
+
+    <!-- label -->
+    <div class="box">
+      <div class="title">label</div>
+
+      <label for="user">用户名：</label>
+      <input type="text" name="user" id="user" />
+
+      <label
+        >用户名：
+        <input type="text" name="user" />
+      </label>
+
+      <!-- 一个控件可以有多个关联的 label 标签 -->
+      <label for="username">用户名：</label>
+      <input type="text" id="username" name="username" />
+      <label for="username"><abbr title="required">*</abbr></label>
+    </div>
+
+    <!-- checkbox -->
+    <div class="box">
+      <div class="title">input checkbox</div>
+
+      <form action="/">
+        <fieldset>
+          <legend>你的兴趣</legend>
+
+          <div>
+            <input type="checkbox" id="coding" name="interest" value="coding" />
+            <label for="coding">编码</label>
+          </div>
+          <div>
+            <input type="checkbox" id="music" name="interest" value="music" />
+            <label for="music">音乐</label>
+          </div>
+        </fieldset>
+        <button>按钮</button>
+      </form>
+    </div>
+
+    <!-- radio -->
+    <div class="box">
+      <div class="title">radio</div>
+
+      <form action="/">
+        <fieldset>
+          <legend>性别</legend>
+          <div>
+            <input type="radio" id="male" name="gender" value="male" />
+            <label for="male">男</label>
+          </div>
+          <div>
+            <input type="radio" id="female" name="gender" value="female" />
+            <label for="female">女</label>
+          </div>
+        </fieldset>
+        <button>提交</button>
+      </form>
+    </div>
+
+    <!-- email password -->
+    <div class="box">
+      <div class="title">email password</div>
+
+      <input type="email" size="40" list="defaultEmails" />
+      <datalist id="defaultEmails">
+        <option value="jbond007@mi6.defence.gov.uk"></option>
+        <option value="jbourne@unknown.net"></option>
+        <option value="nfury@shield.org"></option>
+        <option value="tony@starkindustries.com"></option>
+        <option value="hulk@grrrrrrrr.arg"></option>
+      </datalist>
+
+      <input type="password" id="pass" name="password" minlength="8" required />
+    </div>
+
+    <!-- file -->
+    <div class="box">
+      <div class="tilte">file</div>
+
+      <input
+        type="file"
+        id="avatar"
+        name="avatar"
+        accept="image/png, image/jpeg"
+      />
+    </div>
+
+    <!-- select -->
+    <!-- <div class="box">
+      <div class="title">自定义 select</div>
+
+      <div class="select" style="width: 250px">
+        <div class="el-input el-input--suffix">
+          <input
+            type="text"
+            readonly="readonly"
+            autocomplete="off"
+            placeholder="请选择"
+            class="el-input__inner"
+          />
+          <span class="el-input__suffix">
+            <span class="el-input__suffix-inner">
+              <i class="el-select__caret el-input__icon el-icon-arrow-up"></i>
+            </span>
+          </span>
+        </div>
+
+        <div class="el-select-dropdown el-popper" x-placement="bottom-start">
+          <div class="el-scrollbar" style="">
+            <div
+              class="el-select-dropdown__wrap el-scrollbar__wrap"
+              style="margin-bottom: -17px; margin-right: -17px"
+            >
+              <ul class="el-scrollbar__view el-select-dropdown__list">
+                <li class="el-select-dropdown__item"><span>黄金糕</span></li>
+                <li class="el-select-dropdown__item"><span>双皮奶</span></li>
+                <li class="el-select-dropdown__item"><span>蚵仔煎</span></li>
+                <li class="el-select-dropdown__item"><span>龙须面</span></li>
+                <li class="el-select-dropdown__item"><span>北京烤鸭</span></li>
+              </ul>
+            </div>
+            <div class="el-scrollbar__bar is-horizontal">
+              <div
+                class="el-scrollbar__thumb"
+                style="transform: translateX(0%)"
+              ></div>
+            </div>
+            <div class="el-scrollbar__bar is-vertical">
+              <div
+                class="el-scrollbar__thumb"
+                style="transform: translateY(0%)"
+              ></div>
+            </div>
+          </div>
+          <div x-arrow="" class="popper__arrow" style="left: 35px"></div>
+        </div>
+      </div>
+    </div> -->
+
+    <div class="wrap">
+      <ul class="ul cf">
+        <li></li>
+        <li></li>
+        <li></li>
+      </ul>
+    </div>
+  </body>
+</html>

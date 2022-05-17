@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>选项卡 demo</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    .section-tabs {
+      width: 400px;
+      margin: 50px auto;
+    }
+
+    .nav-item {
+      display: inline-block;
+      padding: 8px 10px;
+      cursor: pointer;
+    }
+
+    .nav-item.active {
+      background-color: #24adf3;
+      color: #fff;
+    }
+
+    .tab-content .box-list {
+      width: 100%;
+      position: relative;
+      overflow: hidden;
+      display: none;
+    }
+
+    .tab-content .box-list .list {
+      white-space: nowrap;
+      transition: .3s;
+    }
+
+    .tab-content .box-list.active {
+      display: block;
+    }
+
+    .tab-content .box-list.active .list {
+      display: inline-block;
+      font-size: 0;
+    }
+
+    .tab-content .box-list .list .list-item {
+      display: inline-block;
+      width: 400px;
+      height: 300px;
+    }
+
+    .list-item>img {
+      width: 100%;
+      height: 100%;
+      vertical-align: bottom;
+    }
+
+    .tab-btn {
+      position: absolute;
+      top: 50%;
+      padding: 10px;
+      transform: translateY(-50%);
+    }
+
+    .tab-btn.prev {
+      left: 10px;
+    }
+
+    .tab-btn.next {
+      right: 10px;
+    }
+
+    /* 指示器 */
+    .indicator {
+      position: absolute;
+      right: 10px;
+      bottom: 10px;
+    }
+
+    .indicator>span {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      border: 1px solid #ddd;
+      border-radius: 2px;
+    }
+
+    .indicator>span.active {
+      background-color: #24adf3;
+    }
+  </style>
+</head>
+
+<body>
+  <section id="tabs" class="section-tabs"></section>
+  <script src="./tabs.js"></script>
+  <script>
+    const tabsElt = document.querySelector('#tabs')
+    tabs(tabsElt)
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      ul {
+        list-style: none;
+        font-size: 0;
+      }
+
+      html {
+        font-size: 13.3333334vw;
+      }
+
+      .nav-container {
+        background-color: #ccc;
+        overflow: hidden;
+        font-size: 0;
+      }
+
+      .nav-container .nav {
+        padding: 0 20px;
+        text-align: justify;
+      }
+
+      .justify::after {
+        content: '';
+        display: inline-block;
+        width: 100%;
+      }
+
+      .nav-container .nav-item {
+        display: inline-block;
+        margin-top: 0.2rem;
+        width: 1.2rem;
+        height: 1.2rem;
+        background-color: #bfa;
+      }
+
+      .nav-container .nav-item:nth-child(-n + 5) {
+        margin-top: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 
+      1. container 控制宽度
+      2. padding 等在 nav 中设置
+      3. nav 添加 justify 样式
+      4. 注意: 拖动使页面宽度变化时, 下边第一个 li 可能会被挤上去. 此例中是当尺寸 width=999 时
+    -->
+    <div class="nav-container">
+      <ul class="nav justify">
+        <li class="nav-item"></li>
+        <li class="nav-item"></li>
+        <li class="nav-item"></li>
+        <li class="nav-item"></li>
+        <li class="nav-item"></li>
+        <li class="nav-item"></li>
+        <li class="nav-item"></li>
+        <li class="nav-item"></li>
+        <li class="nav-item"></li>
+        <li class="nav-item"></li>
+      </ul>
+    </div>
+  </body>
+</html>

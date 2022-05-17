@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>导航 float</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      ul {
+        list-style: none;
+      }
+      html {
+        font-size: 13.3333333333334vw;
+      }
+
+      .clear::after {
+        content: '';
+        display: block;
+        clear: both;
+      }
+
+      /* 
+        第一步: 确定边宽
+        width: 750 - 20*20 边距
+        第四步: 确定 container 高度
+        height: li*2 + space
+      */
+      .nav-container {
+        width: 7.1rem;
+        height: 2.675rem;
+        margin: 0 auto;
+        background-color: #ccc;
+        overflow: hidden;
+      }
+
+      /* 第三步: 确定 nav 宽度 */
+      /* width = 7.1 + li的margin-right 0.275 */
+      .nav-container .nav {
+        width: 7.375rem;
+        display: inline-block;
+      }
+
+      /* 第二步: 确定li宽度, 进而确定 margin-right */
+      /* margin = (710-120*5)/4 */
+      .nav-container .nav-item {
+        float: left;
+        margin-right: 0.275rem;
+        margin-bottom: 0.275rem;
+        width: 1.2rem;
+        height: 1.2rem;
+        background-color: #bfa;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="nav-container">
+      <ul class="nav clear">
+        <li class="nav-item"></li>
+        <li class="nav-item"></li>
+        <li class="nav-item"></li>
+        <li class="nav-item"></li>
+        <li class="nav-item"></li>
+        <!-- <li class="nav-item"></li> -->
+        <li class="nav-item"></li>
+        <li class="nav-item"></li>
+        <li class="nav-item"></li>
+        <li class="nav-item"></li>
+      </ul>
+    </div>
+  </body>
+</html>

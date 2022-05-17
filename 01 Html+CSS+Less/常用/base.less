@@ -1,0 +1,42 @@
+@import "./var.less";
+
+// 使用怪异(替代)盒模型
+html {
+  box-sizing: border-box;
+}
+*, *::before, *::after {
+  box-sizing: inherit;
+}
+// 如果img有边框
+img {
+  box-sizing: content-box;
+}
+
+body {
+  line-height: 1;
+  font-family: '微软雅黑', Arial, Helvetica, sans-serif;
+  background-color: @white;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  font-size: inherit;
+
+  &:hover {
+    color:@blue;
+  }
+}
+
+
+/* 一行省略 */
+/* 需要给容器固定宽度 */
+.ellipsis {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.hidden {
+  display: none;
+}

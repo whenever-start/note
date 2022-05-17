@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>提示卡片</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    .wrap {
+      width: 500px;
+      margin: 200px auto;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .box {
+      width: 200px;
+      height: 100px;
+      background-color: pink;
+    }
+
+    /* 模块代码 */
+    .section-card {
+      position: relative;
+      display: inline-block;
+    }
+
+    .card-prompt {
+      /* 默认 none */
+      display: none;
+      position: absolute;
+    }
+
+    /* 模块代码 end */
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <div class="section-card">
+      <div class="card-main">提示信息1</div>
+
+      <div class="card-prompt">
+        <div class="box"></div>
+      </div>
+    </div>
+
+    <div class="section-card">
+      <div class="card-main">提示信息2</div>
+
+      <div class="card-prompt">
+        <div class="box"></div>
+      </div>
+    </div>
+
+    <div class="section-card">
+      <div class="card-main">提示信息3</div>
+
+      <div class="card-prompt">
+        <div class="box"></div>
+      </div>
+    </div>
+
+    <div class="section-card">
+      <div class="card-main">提示信息4</div>
+
+      <div class="card-prompt">
+        <div class="box"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="../utils/num.js"></script>
+  <script src="../utils/dom.js"></script>
+  <script src="./tooltop.js"></script>
+  <script>
+    const targetsElt = document.querySelectorAll('.section-card')
+    targetsElt.forEach(el => {
+      tooltip(el, {
+        direction: 'top'
+      })
+    })
+
+    const el = document.querySelector('.card-prompt')
+    console.log('hide', cssHide(el, 'width'))
+    // tooltip(targetElt, {
+    //   direction: 'top'
+    // })
+  </script>
+</body>
+
+</html>

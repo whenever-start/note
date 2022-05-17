@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>拖拽</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    .box {
+      position: absolute;
+      width: 200px;
+      height: 200px;
+      margin-left: 300px;
+      margin-top: 200px;
+      background-color: pink;
+    }
+
+    .div {
+      position: absolute;
+      width: 100px;
+      height: 100px;
+      background-color: red;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="box"></div>
+  <div class="div"></div>
+  <script src="../utils/num.js"></script>
+  <script src="../utils/dom.js"></script>
+  <script src="./draggable.js"></script>
+  <script>
+    const box = document.querySelector('.box')
+    console.log(box)
+    draggable(box)
+    draggable(document.querySelector('.div'))
+  </script>
+</body>
+
+</html>

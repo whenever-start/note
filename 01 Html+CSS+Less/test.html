@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    ul,
+    li {
+      list-style: none;
+    }
+
+    .clearfix::after {
+      content: '';
+      display: table;
+      clear: both;
+    }
+
+    .box-nav {
+      width: 1000px;
+      margin: 30px auto 0;
+    }
+
+    .nav {
+      border-radius: 8px;
+      border: 1px solid #eee;
+      background-color: #03a9f4;
+    }
+
+    .nav li {
+      float: left;
+      line-height: 32px;
+      padding: 0 16px;
+      font-size: 16px;
+      color: #fff;
+    }
+
+    .nav li:hover {
+      color: #e91e63;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- 外部盒子: 控制模块在页面的位置 -->
+  <div class="box-nav">
+    <!-- 导航: 模块内容 -->
+    <ul class="nav clearfix">
+      <li>导航1</li>
+      <li>导航2</li>
+      <li>导航3</li>
+      <li>导航4</li>
+    </ul>
+  </div>
+</body>
+
+</html>

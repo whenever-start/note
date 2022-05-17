@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        ul,
+        li {
+            list-style: none;
+        }
+
+        .wrap {
+            width: 500px;
+            margin: 0 auto;
+            white-space: nowrap;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .ul {
+            font-size: 0;
+            display: inline-block;
+            transition: 3000ms;
+        }
+
+
+        .li {
+            font-size: 18px;
+            text-align: center;
+            line-height: 200px;
+            display: inline-block;
+            width: 100px;
+            height: 200px;
+            background-color: pink;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+
+        button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .prev {
+            left: 10px;
+        }
+
+        .next {
+            right: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+        <ul class="ul" id="ul">
+            <li class="li">1</li>
+            <li class="li">2</li>
+            <li class="li">3</li>
+            <li class="li">4</li>
+            <li class="li">5</li>
+            <li class="li">6</li>
+            <li class="li">7</li>
+            <li class="li">8</li>
+            <li class="li">9</li>
+            <li class="li">10</li>
+        </ul>
+        <button class="prev" id="prev-btn">上</button>
+        <button class="next" id="next-btn">下</button>
+    </div>
+    <script>
+        const ul = document.querySelector('#ul')
+        const prevBtn = document.querySelector('#prev-btn')
+        const nextBtn = document.querySelector('#next-btn')
+
+        const count = 5
+        const delay = 3000
+        const step = 500
+        let currentPos = -step
+
+        const arr = ul.querySelectorAll('.li')
+
+        const go = throttle(function () {
+            currentPos -= step
+            translateUl()
+            setTimeout(() => {
+                if (currentPos === -1500) {
+                    clearTransition()
+                    currentPos = -step
+                    translateUl()
+                    setTransition()
+                }
+            }, delay);
+        }, delay)
+
+        init()
+
+        prevBtn.addEventListener('click', function () {
+            currentPos += step
+            translateUl()
+            setTimeout(() => {
+                if (currentPos === 0) {
+                    clearTransition()
+                    currentPos = -2 * step
+                    translateUl()
+                    setTransition()
+                }
+            }, delay);
+        })
+
+        nextBtn.addEventListener('click', go)
+
+
+        function translateUl() {
+            ul.style.transform = `translateX(${currentPos}px)`
+        }
+
+        function init() {
+            cloneDom()
+            translateUl()
+        }
+
+        function cloneDom() {
+            const strArr = ul.innerHTML.match(/<.*<\/li>/g)
+            const prevStr = strArr.slice(0, count).join('')
+            const nextStr = strArr.slice(arr.length - count).join('')
+
+            ul.innerHTML = nextStr + ul.innerHTML + prevStr
+        }
+
+        function clearTransition() {
+            ul.style.transition = '0ms'
+        }
+
+        function setTransition() {
+            setTimeout(() => {
+                ul.style.transition = delay + 'ms'
+            }, 20);
+        }
+
+        function throttle(fn, duration = delay) {
+            let prev = 0
+            return function (...args) {
+                let now = new Date().getTime()
+                if (now - prev > duration) {
+                    fn.apply(this, args)
+                    prev = now
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,717 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+ul,
+li {
+  list-style: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+h1,
+h2,
+h3 {
+  font-weight: normal;
+}
+
+body {
+  font-size: 14px;
+  color: #333;
+  line-height: 1;
+  background-color: #ededef;
+}
+/* ******************* 公共样式 分割线 ************************ */
+
+/* 浮动 */
+.fl {
+  float: left;
+}
+
+.fr {
+  float: right;
+}
+
+.clearfix::after {
+  content: '';
+  display: block;
+  height: 0;
+  visibility: hidden;
+  clear: both;
+}
+
+.container {
+  width: 1160px;
+  margin: 0 auto;
+}
+
+/* chanel */
+.chanel {
+  display: inline-block;
+  border-radius: 999px;
+  background-color: #fff;
+}
+
+.chanel > .link {
+  display: inline-block;
+  padding: 4px 15px;
+  border-radius: 999px;
+}
+
+/* section */
+.section {
+  margin-bottom: 50px;
+}
+
+.section-title {
+  margin-bottom: 30px;
+  text-align: center;
+  font-size: 30px;
+  color: #4c4c4c;
+}
+
+/* bounce btn */
+
+.bounce-btn:hover {
+  animation: bounce-btn 0.4s forwards;
+}
+
+/* thumb */
+.thumb {
+  width: 100%;
+  overflow: hidden;
+}
+
+.thumb img {
+  vertical-align: bottom;
+  width: 100%;
+  height: 100%;
+}
+
+/* 省略 */
+.ellipsis {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.ellipsis-l2 {
+  display: -webkit-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+/* ******************* header 分割线 ************************ */
+
+.header {
+  min-width: 1160px;
+  height: 70px;
+  background-color: #fff;
+}
+
+.header .container,
+.header .container .fl,
+.header .container .fr {
+  height: 100%;
+}
+
+.header .container .fl::before,
+.header .container .fr::before {
+  content: '';
+  display: inline-block;
+  width: 0;
+  height: 100%;
+  vertical-align: middle;
+}
+
+.header .container .fl > *,
+.header .container .fr > * {
+  vertical-align: middle;
+}
+
+/* logo */
+.header .logo {
+  display: inline-block;
+  width: 60px;
+  height: 60px;
+  overflow: hidden;
+}
+
+.header .logo img {
+  width: 100%;
+  height: 100%;
+}
+
+/* chanel */
+.header .chanel {
+  border: 1px solid #46897d;
+  color: #46897d;
+  margin-left: 22px;
+}
+
+/* nav */
+.nav {
+  display: inline-block;
+  font-size: 0;
+}
+
+.nav-item {
+  position: relative;
+  display: inline-block;
+  padding: 0 10px;
+  font-size: 16px;
+}
+
+.nav-item .label {
+  line-height: 70px;
+}
+
+.active-bar {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 0;
+  height: 5px;
+  border-radius: 999px;
+  background-color: #a6ce39;
+  transition: all 0.3s;
+  transform: translateX(-50%);
+}
+
+.nav-item.active .active-bar,
+.nav-item .label:hover + .active-bar {
+  display: block;
+  width: 100%;
+}
+
+/* popup */
+.nav .popup {
+  display: none;
+  position: fixed;
+  z-index: 999;
+  left: 0;
+  right: 0;
+  background-color: #f5f9ea;
+  padding: 50px 15px;
+  transition: all 3s;
+}
+
+.nav-item:hover .popup {
+  display: block;
+}
+
+.nav .popup .container {
+  text-align: center;
+}
+
+.nav .popup .subnav {
+  display: inline-block;
+}
+
+.nav .popup .subnav .subnav-item {
+  float: left;
+  width: 230px;
+  border-left: 1px solid #deedb5;
+  border-right: 1px solid #deedb5;
+}
+
+.nav .popup .subnav .subnav-item .title {
+  margin-bottom: 30px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.nav .popup .subnav .subnav-item .subnav-list .link {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+
+/* icon */
+.vip,
+.search {
+  display: inline-block;
+  margin-left: 8px;
+}
+
+.vip .iconfont,
+.search .iconfont {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+}
+
+/* link */
+.chanel .link:hover,
+.nav-item .label:hover,
+.nav-item .link:hover,
+.vip:hover {
+  color: #a6ce39;
+}
+
+/* ******************* swiper 分割线 ************************ */
+
+.swiper-wrap {
+  position: relative;
+  min-width: 1160px;
+}
+
+.swiper-wrap .swiper {
+  position: relative;
+}
+
+/* image */
+.swiper-wrap .swiper-image-container {
+  height: 461px;
+  overflow: hidden;
+}
+
+.swiper-wrap .non-break-row {
+  display: inline-block;
+  white-space: nowrap;
+  font-size: 0;
+}
+
+.swiper-wrap .swiper-image-container .thumb {
+  display: inline-block;
+  /* width: 100%; */
+}
+
+/* button */
+.swiper-wrap .swiper-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 36px;
+  height: 36px;
+  background-color: #fff;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 36px;
+  cursor: pointer;
+  border: 1px solid transparent;
+}
+
+.swiper-wrap .swiper-btn:hover {
+  border: 1px solid #a6ce39;
+  color: #a6ce39;
+}
+
+.swiper-wrap .swiper-btn.btn-left {
+  left: 20px;
+}
+
+.swiper-wrap .swiper-btn.btn-right {
+  right: 20px;
+}
+
+/* indicator */
+.swiper-indicator {
+  position: relative;
+  padding: 6px 0;
+  margin-top: 30px;
+  text-align: center;
+  font-size: 0;
+}
+
+.swiper-indicator .dot {
+  display: inline-block;
+  margin: 0 5px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #fff;
+  cursor: pointer;
+}
+
+.swiper-indicator .dot.active {
+  width: 60px;
+  border-radius: 999px;
+  background-color: #a6ce39;
+}
+
+.swiper-wrap .form {
+  position: absolute;
+  left: 50%;
+  top: 342px;
+  width: 960px;
+  height: 116px;
+  transform: translateX(-50%);
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.8);
+  overflow: hidden;
+}
+
+/* ******************* 广州 珠海导航 分割线 ************************ */
+
+.other-area {
+  margin: 55px 0;
+  text-align: center;
+  font-size: 0;
+}
+
+.other-area .btn {
+  display: inline-block;
+  width: 282px;
+  height: 40px;
+  border-radius: 999px;
+  font-size: 16px;
+  color: #fff;
+  vertical-align: middle;
+}
+
+.other-area .btn::after {
+  content: '';
+  display: inline-block;
+  width: 0;
+  height: 100%;
+  vertical-align: middle;
+}
+
+.other-area .btn.gz {
+  background-color: #46897d;
+}
+
+.other-area .btn.zh {
+  margin-left: 30px;
+  background-color: #005aaa;
+}
+
+/* icon */
+.other-area .btn .iconfont {
+  font-size: 24px;
+  vertical-align: middle;
+}
+
+/* ******************* 行程推荐 分割线 ************************ */
+
+.section-travel {
+}
+
+.section-travel .travel-container {
+  overflow: hidden;
+  font-size: 0;
+}
+
+.section-travel .travel-container .travel-container-inner {
+  display: inline-block;
+  white-space: nowrap;
+  text-align: center;
+}
+
+/* item */
+.section-travel .travel-item {
+  position: relative;
+  display: inline-block;
+  margin-right: 10px;
+  width: 380px;
+  border-radius: 20px;
+  overflow: hidden;
+}
+.section-travel .travel-item:hover .thumb {
+}
+
+.section-travel .travel-item:hover .thumb img {
+  transition: all 0.3s;
+}
+
+.section-travel .travel-item:hover .thumb img {
+  transform: scale(1.2);
+}
+
+/* icon */
+.section-travel .sketch-map {
+  position: absolute;
+  bottom: 70px;
+  z-index: 1;
+  width: 100%;
+  text-align: center;
+}
+
+.section-travel .sketch-map .iconfont {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.section-travel .sketch-map .iconfont:not(:first-child) {
+  margin-left: 10px;
+}
+
+.section-travel .sketch-map .iconfont.icon-day {
+  background-image: url('./images/小太阳.png');
+}
+
+.section-travel .sketch-map .iconfont.icon-night {
+  background-image: url('./images/小月亮.png');
+}
+
+/* name */
+.section-travel .travel-item .name {
+  position: absolute;
+  bottom: 20px;
+  width: 100%;
+  z-index: 1;
+  text-align: center;
+  font-size: 30px;
+  color: #fff;
+}
+
+/* overlay */
+.section-travel .overlay {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 182px;
+  bottom: 0;
+  background-image: url('./images/绿色图标（2）.png');
+}
+
+/* ******************* 热门推荐 分割线 ************************ */
+
+/* chanel */
+.section-hot .chanel-wrap {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.section-hot .chanel {
+  border: 1px solid #a6ce39;
+  color: #a6ce39;
+}
+
+.section-hot .chanel > .link {
+  color: #a6ce39;
+}
+
+.section-hot .chanel > .link.active {
+  background-color: #a6ce39;
+  color: #fff;
+}
+
+.section-hot .chanel > .link:not(.active):hover {
+  color: #005aaa;
+}
+
+.section-hot .chanel.zh {
+  border: 1px solid #005baa;
+  color: #005baa;
+}
+
+.section-hot .chanel.zh > .link {
+  color: #005baa;
+}
+
+.section-hot .chanel.zh > .link.active {
+  background-color: #005baa;
+  color: #fff;
+}
+.section-hot .chanel.zh > .link.active {
+  background-color: #005baa;
+  color: #fff;
+}
+
+.section-hot .chanel.gz > .link:not(.active):hover {
+  color: #a6ce39;
+}
+
+/* item */
+.section-hot .hot-container-item {
+  float: left;
+  margin-bottom: 25px;
+  width: 285px;
+  overflow: hidden;
+}
+
+.section-hot .hot-container-item:hover .thumb img {
+  transform: scale(1.2);
+}
+
+.section-hot .hot-container-item .thumb {
+  border-radius: 20px;
+  height: 285px;
+}
+
+.section-hot .hot-container-item .thumb img {
+  transition: transform 0.3s;
+}
+
+.section-hot .hot-container-item:not(:first-child) {
+  margin-left: 10px;
+}
+
+.section-hot .hot-container-item.twice {
+  width: 570px;
+}
+
+/* title */
+.section-hot .hot-container-item .title {
+  margin-top: 15px;
+  text-align: center;
+  font-size: 18px;
+  transition: color 0.3s;
+}
+
+.section-hot .hot-container-item:hover .title {
+  color: #a6ce39;
+}
+
+/* ******************* 新闻资讯 分割线 ************************ */
+
+/* more */
+.more-wrap {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.more-wrap .btn-more {
+  padding: 8px 26px;
+  display: inline-block;
+  border: 1px solid #333;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.more-wrap .btn-more:hover {
+  color: #fff;
+  border: 1px solid #a6ce39;
+  background-color: #a6ce39;
+}
+
+/* news */
+.section-news .news-container {
+  padding: 50px 35px 40px;
+  border-radius: 20px;
+  background-color: #fff;
+}
+
+.section-news .notice-zoom {
+  position: relative;
+  float: left;
+  display: block;
+  width: 484px;
+  height: 484px;
+  border-radius: 20px;
+}
+
+.section-news .notice-zoom .icon-notice {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: no-repeat;
+  background-image: url('./images/公告.jpg');
+}
+
+.section-news .notice-zoom .notice-desc {
+  position: absolute;
+  padding: 0 36px;
+  line-height: 58px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  color: #fff;
+  background-color: #a6ce39;
+}
+
+.section-news .notice-zoom .notice-desc .title {
+  float: left;
+  font-size: 18px;
+}
+
+.section-news .notice-zoom .notice-desc .time {
+  float: right;
+}
+
+/* notice-list */
+.section-news .notice-list-container {
+  float: right;
+  width: 590px;
+}
+
+.section-news .notice-list-container .notice-item {
+  padding: 16px 0;
+  border-top: 1px solid #cecece;
+}
+
+.section-news .notice-list-container .notice-item:first-of-type {
+  padding-top: 0;
+  border: none;
+}
+
+.section-news .notice-list-container .notice-item:last-of-type {
+  padding-bottom: 0;
+}
+
+.section-news .notice-list-container .notice-item .icon-notice {
+  display: block;
+  float: left;
+  width: 140px;
+  height: 140px;
+  border-radius: 20px;
+  background: center no-repeat;
+  background-size: cover;
+  background-image: url('./images/公告-小.jpg');
+}
+
+/* content */
+.section-news .notice-list-container .notice-item .notice-content {
+  float: right;
+  width: 430px;
+}
+
+.section-news .notice-list-container .notice-item .notice-title {
+  margin-bottom: 8px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.section-news .notice-list-container .notice-item .notice-time {
+  margin-bottom: 8px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.section-news .notice-list-container .notice-item .notice-detail {
+  margin-bottom: 8px;
+  font-size: 16px;
+  line-height: 24px;
+  max-height: 48px;
+  overflow: hidden;
+}
+
+/* 了解更多 */
+.notice-list-container .notice-item .btn-more {
+  display: inline-block;
+  padding: 8px 48px;
+  border-radius: 999px;
+  background-color: #a6ce39;
+  color: #fff;
+  font-size: 16px;
+}
+
+/* ******************* 动画 分割线 ************************ */
+@keyframes bounce-btn {
+  from {
+    transform: scale(1);
+  }
+
+  25% {
+    transform: scale(0.9);
+  }
+
+  50% {
+    transform: scale(0.95);
+  }
+
+  to {
+    transform: scale(0.98);
+  }
+}

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="./vue@2.6.8.js"></script>
+    <script src="./vue-router.min.js"></script>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      a {
+        columns: #333;
+        text-decoration: none;
+      }
+      .abc {
+        color: #bfa;
+      }
+    </style>
+    <title>vue 模板语法</title>
+  </head>
+  <body>
+    <div id="app">
+      <router-link to="/" exact-active-class="abc">Go to Home</router-link>
+      <router-link to="/about" active-class="abc">Go to About</router-link>
+
+      <router-view></router-view>
+    </div>
+
+    <script>
+      const Home = { template: '<div>Home</div>' }
+      const About = { template: '<div>About</div>' }
+
+      const router = new VueRouter({
+        routes: [
+          {
+            path: '/',
+            component: Home
+          },
+          {
+            path: '/about',
+            component: About
+          }
+        ]
+      })
+
+      const app = new Vue({
+        router
+      }).$mount('#app')
+    </script>
+  </body>
+</html>

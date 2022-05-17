@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>vue 双向绑定原理</title>
+  </head>
+  <body>
+    <input id="inp1" type="text" />
+    <input id="inp2" type="text" />
+
+    <script>
+      const inp1 = document.querySelector('#inp1')
+      const inp2 = document.querySelector('#inp2')
+      let msg = ''
+
+      function twoWayBinding(target, value) {
+        let obj = Object.defineProperty({}, 'value', {
+          set(newValue) {
+            target.value = newValue
+            console.log(target)
+          }
+        })
+
+        target.addEventListener('keyup', function (event) {
+          obj.value = target.value
+        })
+      }
+
+      twoWayBinding(inp1, msg)
+      twoWayBinding(inp2, msg)
+    </script>
+  </body>
+</html>

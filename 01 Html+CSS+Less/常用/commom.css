@@ -1,0 +1,28 @@
+.clearfix {
+  zoom: 1;
+}
+.clearfix::after {
+  content: '';
+  display: block;
+  height: 0;
+  visibility: hidden;
+  clear: both;
+}
+
+/* 一行省略 */
+/* 需要给容器固定宽度 */
+.ellipsis {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.hidden {
+  display: none;
+}
+
+/* 自定义宽度 */
+.container {
+  width: 1000px;
+  margin: 0 auto;
+}
