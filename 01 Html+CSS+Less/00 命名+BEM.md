@@ -1,5 +1,26 @@
 # 命名 + BEM
 
+## 规则
+
+[BEM — Blocks, Elements and Modifiers](https://medium.com/tldr-tech/bem-blocks-elements-and-modifiers-6b3b0af9e3ea#.bhnomd7gw)
+
+[BEM 101](https://css-tricks.com/bem-101/)
+
+B: Block, 组件最顶级
+E: Element, Block 的直接子元素
+M: Modifier, 组件修饰符，样式微调
+
+```css
+.btn {
+}
+.btn__price {
+}
+.btn--orange {
+}
+.btn--big {
+}
+```
+
 ## 布局
 
 - `mod`

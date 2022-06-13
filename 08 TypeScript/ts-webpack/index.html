@@ -6,5 +6,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>typescript + webpack</title>
   </head>
-  <body></body>
+  <body>
+    <div class="box">BOX</div>
+    <button class="btn">按钮</button>
+    <script src="./index.js"></script>
+    <script>
+      const boxElt = document.querySelector('.box')
+      const btnElt = document.querySelector('.btn')
+
+      // classList.add(boxElt, 'red')
+      // classList.remove(boxElt, 'red')
+      // btnElt.addEventListener('click', function () {
+      //   classList.toggle(boxElt, 'red')
+      // })
+
+      hasSelector(boxElt, '.box')
+    </script>
+  </body>
 </html>

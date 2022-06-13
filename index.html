@@ -6,27 +6,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <style>
-      * {
-        margin: 0;
-        padding: 0;
-      }
-      ul {
-        list-style: none;
-      }
-      .cf::after {
-        content: '';
-        display: block;
-        clear: both;
-      }
-
-      body {
-        font-size: 16px;
-        line-height: 1;
-        height: 200vh;
+      .red {
+        color: red;
       }
     </style>
   </head>
   <body>
+    <div class="box">BOX</div>
+    <button class="btn">按钮</button>
     <script src="./index.js"></script>
+    <script>
+      const boxElt = document.querySelector('.box')
+      const btnElt = document.querySelector('.btn')
+
+      addClass(boxElt, 'red')
+      removeClass(boxElt, 'red')
+      btnElt.addEventListener('click', function () {
+        toggleClass(boxElt, 'red')
+      })
+    </script>
   </body>
 </html>

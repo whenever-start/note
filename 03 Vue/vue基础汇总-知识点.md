@@ -2,7 +2,7 @@
 
 [toc]
 
-## 简单网页测试
+## 一、简单网页测试
 
 ---
 
@@ -28,7 +28,7 @@
 </script>
 ```
 
-## 生命周期和钩子函数
+## 二、生命周期和钩子函数
 
 [vue 官网教程](https://cn.vuejs.org/v2/guide/instance.html#%E6%95%B0%E6%8D%AE%E4%B8%8E%E6%96%B9%E6%B3%95)
 [参考来源](https://blog.csdn.net/m0_37805167/article/details/79655346)
@@ -85,7 +85,7 @@
 3. `mounted`: 当需要操作 `dom` 的时候执行,可以配合 `$.nextTick` 用法,进行单一事件对数据的更新后跟新立即 `dom`
 4. `updated`: 当数据更新需要做统一业务处理的时候
 
-## 模板语法
+## 三、模板语法
 
 ---
 
@@ -132,7 +132,7 @@ data:(){
 <p v-if="onShow">是否显示</p>
 ```
 
-## computed 和 watch
+## 四、computed 和 watch
 
 ---
 
@@ -325,7 +325,267 @@ watch: {
 <li v-for="item in array" :key="item.id">{{item}}</li>
 ```
 
+#### 数组更新检测
+
+- 变更方法：使用这些方法操作数据，`dom` 会同步更新
+
+  `push` `pop` `shift` `unshift` `splice` `sort` `reverse`
+
+- 替换数组：使用这些方法，由于生成的是新数组而不改变原数组，可以让原数组等于新数组，同样可以更新，且能高效渲染。比如 `filter` `concat` `slice`
+
+  ```js
+  // 可以同步更新，dom 也不会删掉前面的元素再重新渲染
+  this.list = this.list.concat([1, 2, 3])
+  ```
+
+#### 检测数组何对象的变化
+
+由于 `js` 的原因，`vue` 不能检测到数组何对象的变化，因此无法同步`dom`。
+
+- 对象：无法检测属性的添加和移除。
+
+  ```js
+  // 数据
+  data = {
+    dog: {
+      name: '小黑',
+      age: 3,
+      like: 'play'
+    },
+    list: [
+      {
+        id: 1,
+        name: 'an',
+        age: 18
+      },
+      {
+        id: 2,
+        name: 'bn',
+        age: 18
+      },
+      {
+        id: 3,
+        name: 'cn',
+        age: 18
+      }
+    ]
+  }
+  ```
+
+  ```js
+  // 操作
+  this.list.forEach((item) => {
+    // 直接修改 vue 无法检测到，因此不会同步到 dom 中
+    item.sex = '男'
+
+    // 使用 Vue.set(object,propertyName,value)
+    // 或者 this.$set(this.object,propertyName,value)
+    this.$set(item, 'sex', Math.random() > 0.5 ? '男' : '女')
+  })
+
+  // 使用 Object.assign()
+  // 无法响应
+  Object.assign(this.dog, { sex: 'boy' })
+  // 使用新对象来接收
+  this.newDog = Object.assign({}, this.dog, { sex: 'boy' })
+  // 需要在 data 中声明，在 created 中赋值，html 中也用这个属性
+  this.newDog = this.dog
+  ```
+
+- 数组：不能直接用序号赋值、不能操作 `length`
+
+  ```js
+  // 非响应式：不能直接用序号赋值
+  this.items[1] = 'hello'
+  // Vue.set 或 this.$set 解决
+  this.$set(this.items, '1', 'hello')
+  // 利用 splice 解决（改变了原数组）
+  this.items.splice(1, 1, 'hello')
+
+  // 非响应式：不能操作 `length`
+  this.items.length = 0
+  // 利用  splice 解决
+  this.items.splice(1)
+  ```
+
+#### 显示过滤后的数组
+
+在 `computed` 中用新数组，而不变更或重置原数组。
+
+```js
+new Vue({
+  data() {
+    return(){
+      items: [1, 2, 3, 4, 5, 6, 7, 8]
+    }
+  },
+  computed: {
+    evenNumbers() {
+      return this.numbers.filter((n) => n % 2 === 0)
+    }
+  }
+})
+```
+
+如果不适合用 `computed` （比如要用到参数或者嵌套 `v-for` 等），可以用 `methods`
+
+```html
+<ul v-for="set in sets">
+  <li v-for="n in even(set)">{{n}}</li>
+</ul>
+```
+
+```js
+new Vue({
+  data() {
+    sets: [
+      [1, 2, 3, 4, 5],
+      [6, 7, 8, 9, 10]
+    ]
+  },
+  methods: {
+    even(array) {
+      return array.filter((n) => n % 2 === 0)
+    }
+  }
+})
+```
+
+#### `v-for` + `template`
+
+渲染结果没有 `template`
+
+```html
+<!-- 使用 v-for + template -->
+<ul>
+  <template v-for="item in list">
+    <li>{{item.name}}</li>
+    <li>{{item.age}}</li>
+    <li>{{item.id}}</li>
+  </template>
+</ul>
+```
+
+```js
+new Vue({
+  data: {
+    list: [
+      {
+        id: 1,
+        name: 'an',
+        age: 18
+      },
+      {
+        id: 2,
+        name: 'bn',
+        age: 18
+      },
+      {
+        id: 3,
+        name: 'cn',
+        age: 18
+      }
+    ]
+  }
+})
+```
+
+#### `v-for` 与 `v-if` 一同使用
+
+`v-for` 优先级更高，即会渲染多个列表，每个列表再判断自身的 `v-if`
+不推荐在同意元素上同时使用。
+
+```html
+<!-- isComplete === false 的会被渲染 -->
+<!-- isComplete === true 的不会被渲染 -->
+<li v-for="todo in todos" v-if="!todo.isComplete">{{ todo }}</li>
+
+<!-- 想要判断整体，则在外面套个 div -->
+<ul v-if="todos.length">
+  <li v-for="todo in todos">{{ todo }}</li>
+</ul>
+<p v-else>No todos left!</p>
+```
+
 ### 事件处理
+
+#### 原生事件 `event`
+
+- `key-value` 形式可以直接访问到 `event`
+- `es6` 的方法，需要在 `@click` 中手动添加 `$event`
+
+```html
+<button @click="fn1">fn1</button> <button @click="fn2($event)">fn2</button>
+```
+
+```js
+methods: {
+  // key-value 形式可以直接访问到 event
+  fn1: function(){
+    console.log(event)
+  },
+  // es6 的方法，需要在 @click 中手动添加 $event
+  fn2(event){
+    console.log(event)
+  }
+}
+```
+
+#### 事件修饰符
+
+- `stop`
+- `prevent`
+- `capture`
+- `self`
+- `once`
+- `passive`
+
+```txt
+click.stop: 阻止冒泡，event.stopPropagation()
+click.prevent: 阻止原生事件，event.preventDefault()
+click.capture: 捕获模式。div.addEventListener('click',handle,true)
+click.self: event.target 为自身时触发。
+click.once: 只触发一次。
+scroll.passive: “被动、顺从”。div.addEventListener('scroll',handle,{passive:true})。主动告诉浏览器不会阻止默认事件，可以让滚动更加顺滑。不可以与 prevent 修饰符一起使用，否则会被忽略并触发警告。
+```
+
+#### 按键修饰符
+
+- `enter`
+- `tab`
+- `delete` (捕获“删除”和“退格”键)
+- `esc`
+- `space`
+- `up`
+- `down`
+- `left`
+- `right`
+- `ctrl`
+- `alt`
+- `shift`
+- `meta`
+
+可以全局自定义
+
+```js
+// 112 是 f1 键位的 keycode，名字可以自定义。
+// keycode: https://developer.mozilla.org/zh-CN/docs/Web/API/KeyboardEvent/keyCode
+Vue.config.keyCodes.f1 = 112
+```
+
+```html
+<!-- ctrl+click -->
+<div v-on:click.ctrl="doSomething">Do something</div>
+
+<!-- 功能键只有 ctrl 被按下会触发，同时按下 shift alt meta 不会触发 -->
+<div v-on:click.ctrl.exact="doSomething">Do something</div>
+```
+
+#### 鼠标按钮修饰符
+
+- `left`：鼠标左键
+- `right`：鼠标右键
+- `middle`：鼠标中间
 
 ### 表单输入绑定
 
@@ -1033,6 +1293,55 @@ methods: {
 **_v-once:_** 只计算一次内容,然后缓存起来,不再更新
 
 **_注意:_** 尽量不要用, 不利于后期维护(比如看漏了 `v-once`, 而纠结为什么数据不会更新)
+
+### 递归组件
+
+递归自己，用 `name` 属性，或者 `Vue.component` 注册时的名字自动称为 `name` 属性
+
+```vue
+<!-- name: A -->
+<template>
+  <div><A></A></div>
+</template>
+```
+
+如果没有出口，会导致栈溢出。所以需要 `v-if` 来确保退出条件
+
+### 组件循环引用
+
+```html
+<!-- A 组件 -->
+<p>
+  <span>{{ folder.name }}</span>
+  <tree-folder-contents :children="folder.children" />
+</p>
+```
+
+```html
+<!-- B 组件 -->
+<ul>
+  <li v-for="child in children">
+    <tree-folder v-if="child.children" :folder="child" />
+    <span v-else>{{ child.name }}</span>
+  </li>
+</ul>
+```
+
+如上，A 组件需要引入 B 组件，而 B 组建又需要引入 A 组件，无限循环。如果是用 `Vue.component` 注册，可以正常。如果是 `vue` 文件，就会出问题。
+**解决：**
+
+```js
+// 以 A 作为起点，A 正常引入 B
+// 而 B 用异步加载引入 A
+components: {
+  A: () => import('./A.vue')
+}
+
+// 或者
+beforeCreate: function () {
+  this.$options.components.TreeFolderContents = require('./A.vue').default
+}
+```
 
 ## 混入(mixin)
 
