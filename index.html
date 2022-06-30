@@ -5,25 +5,40 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <style>
-      .red {
-        color: red;
-      }
-    </style>
   </head>
   <body>
-    <div class="box">BOX</div>
-    <button class="btn">按钮</button>
-    <script src="./index.js"></script>
-    <script>
-      const boxElt = document.querySelector('.box')
-      const btnElt = document.querySelector('.btn')
+    <div class="todo">
+      <!-- header -->
+      <div class="todo-header">
+        <div class="todo-input_box">
+          <input type="text" class="todo-input" />
+        </div>
+      </div>
 
-      addClass(boxElt, 'red')
-      removeClass(boxElt, 'red')
-      btnElt.addEventListener('click', function () {
-        toggleClass(boxElt, 'red')
-      })
-    </script>
+      <!-- main -->
+      <div class="todo-main">
+        <ul class="todo-list">
+          <li class="todo-list-item active">
+            <div class="todo-checkbox"><input type="checkbox" /></div>
+            <div class="todo-text">学习</div>
+            <div class="btn-close">X</div>
+          </li>
+          <li class="todo-list-item">
+            <div class="checkbox"><input type="checkbox" /></div>
+            <div class="todo-text">吃饭</div>
+            <div class="btn-close">X</div>
+          </li>
+        </ul>
+      </div>
+
+      <!-- footer -->
+      <div class="todo-footer">
+        <div class="todo-checkbox"><input type="checkbox" /></div>
+
+        <div class="todo-footer-text">已完成3/全部4</div>
+
+        <div class="btn-clear">清楚已完成任务</div>
+      </div>
+    </div>
   </body>
 </html>

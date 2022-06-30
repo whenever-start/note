@@ -1,23 +1,23 @@
-const localStorage = window.localStorage
+const localStorage = {
+  get(key, def = '') {
+    let value = deserialize(window.localStorage.getItem(key))
+    return value === undefined ? def : value
+  },
 
-export const get = (key, def = '') => {
-  let value = deserialize(localStorage.getItem(key))
-  return value === undefined ? def : value
-}
+  set(key, value) {
+    if (value === undefined) {
+      return this.remove(key)
+    }
+    window.localStorage.setItem(key, serialize(value))
+  },
 
-export const set = (key, value) => {
-  if (value === undefined) {
-    return this.remove(key)
+  remove(key) {
+    window.localStorage.removeItem(key)
+  },
+
+  clear() {
+    window.localStorage.clear()
   }
-  localStorage.setItem(key, serialize(value))
-}
-
-export const remove = (key) => {
-  localStorage.removeItem(key)
-}
-
-export const clear = () => {
-  localStorage.clear()
 }
 
 function serialize(value) {
